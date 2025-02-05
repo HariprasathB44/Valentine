@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine, Jilluuuu? ❤️</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(45deg, #ff8a8a, #ff4081, #f1c6ea);
+            background-size: 300% 300%;
+            animation: gradientBackground 8s ease-in-out infinite;
+            color: #d81b60;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100vh;
+        }
+        h1 {
+            font-size: 70px;
+            color: white;
+            text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.5);
+            margin-top: 100px;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .buttons {
+            margin-top: 40px;
+        }
+        button {
+            font-size: 30px;
+            padding: 25px 45px;
+            margin: 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: transform 0.3s, box-shadow 0.3s, filter 0.3s;
+        }
+        #yesBtn {
+            background-color: #66bb6a; /* Green */
+            color: white;
+            box-shadow: 0 0 15px rgba(102, 187, 106, 0.8);
+        }
+        #yesBtn:hover {
+            transform: scale(1.1);
+            filter: brightness(1.3);
+        }
+        #noBtn {
+            background-color: #e57373; /* Red */
+            color: white;
+            box-shadow: 0 0 15px rgba(229, 115, 115, 0.8);
+        }
+        #noBtn:hover {
+            transform: scale(1.1);
+            filter: brightness(1.3);
+        }
+        /* Popup Styling */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            box-shadow: 0px 12px 30px rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            text-align: center;
+            z-index: 1000;
+            animation: popupIn 1s ease-in-out;
+        }
+        .popup h2 {
+            color: #d81b60;
+            font-size: 48px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .popup p {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #ff4081;
+        }
+        .close-btn {
+            padding: 15px 30px;
+            background-color: #d81b60;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            font-size: 24px;
+        }
+        /* Heart Particle Animation */
+        .heart {
+            position: absolute;
+            color: red;
+            font-size: 30px;
+            animation: float 4s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-300px); opacity: 0; }
+        }
+        /* Rose Petal Animation */
+        .rose {
+            position: absolute;
+            color: pink;
+            font-size: 35px;
+            animation: roseAnimation 6s ease-in-out infinite;
+        }
+        @keyframes roseAnimation {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-250px); opacity: 0; }
+        }
+        /* Floating Bubble Animation */
+        .bubble {
+            position: absolute;
+            font-size: 50px;
+            animation: bubbleAnimation 5s ease-in-out infinite;
+        }
+        @keyframes bubbleAnimation {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-200px); opacity: 0; }
+        }
+        /* Cloud Animation */
+        .cloud {
+            position: absolute;
+            color: white;
+            font-size: 30px;
+            animation: cloudAnimation 10s ease-in-out infinite;
+        }
+        @keyframes cloudAnimation {
+            0% { opacity: 1; transform: translateX(0); }
+            100% { opacity: 0; transform: translateX(100vw); }
+        }
+        /* Gradient Background Animation */
+        @keyframes gradientBackground {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes popupIn {
+            from { opacity: 0; transform: translate(-50%, -60%); }
+            to { opacity: 1; transform: translate(-50%, -50%); }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Will you be my Valentine, Jilluuuu? ❤️</h1>
+    
+    <div class="buttons">
+        <button id="yesBtn" onclick="sayYes()">Yes</button>
+        <button id="noBtn" onclick="growYesButton()">No</button>
+    </div>
+
+    <!-- Popup Box -->
+    <div id="popup" class="popup">
+        <h2>Yes! 💖</h2>
+        <p>I love you, Jilluuuu! You make my world brighter! 🌟</p>
+        <button class="close-btn" onclick="closePopup()">Close</button>
+    </div>
+
+    <script>
+        let yesBtnSize = 30; // Initial font size
+
+        function sayYes() {
+            document.getElementById("popup").style.display = "block";
+            createHearts();
+            createRoses();
+            createBubbles();
+            createClouds();
+        }
+
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+
+        function growYesButton() {
+            yesBtnSize += 8; // Increase size immediately
+            document.getElementById("yesBtn").style.fontSize = yesBtnSize + "px";
+            document.getElementById("yesBtn").style.padding = (yesBtnSize / 2) + "px " + (yesBtnSize) + "px";
+        }
+
+        function createHearts() {
+            for (let i = 0; i < 30; i++) {
+                let heart = document.createElement("div");
+                heart.className = "heart";
+                heart.innerHTML = "❤️";
+                document.body.appendChild(heart);
+                
+                let x = Math.random() * window.innerWidth;
+                let y = Math.random() * window.innerHeight;
+
+                heart.style.left = `${x}px`;
+                heart.style.top = `${y}px`;
+                heart.style.animationDuration = `${3 + Math.random() * 2}s`;
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 4000);
+            }
+        }
+
+        function createRoses() {
+            for (let i = 0; i < 10; i++) {
+                let rose = document.createElement("div");
+                rose.className = "rose";
+                rose.innerHTML = "🌹";
+                document.body.appendChild(rose);
+                
+                let x = Math.random() * window.innerWidth;
+                let y = Math.random() * window.innerHeight;
+
+                rose.style.left = `${x}px`;
+                rose.style.top = `${y}px`;
+                rose.style.animationDuration = `${4 + Math.random() * 3}s`;
+
+                setTimeout(() => {
+                    rose.remove();
+                }, 6000);
+            }
+        }
+
+        function createBubbles() {
+            for (let i = 0; i < 10; i++) {
+                let bubble = document.createElement("div");
+                bubble.className = "bubble";
+                bubble.innerHTML = "💫";
+                document.body.appendChild(bubble);
+                
+                let x = Math.random() * window.innerWidth;
+                let y = Math.random() * window.innerHeight;
+
+                bubble.style.left = `${x}px`;
+                bubble.style.top = `${y}px`;
+                bubble.style.animationDuration = `${5 + Math.random() * 3}s`;
+
+                setTimeout(() => {
+                    bubble.remove();
+                }, 8000);
+            }
+        }
+
+        function createClouds() {
+            for (let i = 0; i < 5; i++) {
+                let cloud = document.createElement("div");
+                cloud.className = "cloud";
+                cloud.innerHTML = "💭";
+                document.body.appendChild(cloud);
+                
+                let x = Math.random() * window.innerWidth;
+                let y = Math.random() * window.innerHeight;
+
+                cloud.style.left = `${x}px`;
+                cloud.style.top = `${y}px`;
+                cloud.style.animationDuration = `${6 + Math.random() * 6}s`;
+
+                setTimeout(() => {
+                    cloud.remove();
+                }, 10000);
+            }
+        }
+    </script>
+
+</body>
+</html>
